@@ -197,14 +197,14 @@ verify_cloudflare() {
     local account_zone=
     local errors=
 
-    _has_envar "BOOTSTRAP_CLOUDFLARE_APIKEY"
+    _has_envar "BOOTSTRAP_CLOUDFLARE_TOKEN"
     _has_envar "BOOTSTRAP_CLOUDFLARE_DOMAIN"
     _has_envar "BOOTSTRAP_CLOUDFLARE_EMAIL"
 
     # Try to retrieve zone information from Cloudflare's API
     account_zone=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=${BOOTSTRAP_CLOUDFLARE_DOMAIN}&status=active" \
         -H "X-Auth-Email: ${BOOTSTRAP_CLOUDFLARE_EMAIL}" \
-        -H "X-Auth-Key: ${BOOTSTRAP_CLOUDFLARE_APIKEY}" \
+        -H "Authorization: ${BOOTSTRAP_CLOUDFLARE_TOKEN}" \
         -H "Content-Type: application/json"
     )
 
@@ -226,7 +226,7 @@ verify_ansible_hosts() {
     local node_hostname=
     local default_control_node_prefix=
     local default_worker_node_prefix=
-    
+
     default_control_node_prefix="BOOTSTRAP_ANSIBLE_DEFAULT_CONTROL_NODE_HOSTNAME_PREFIX"
     default_worker_node_prefix="BOOTSTRAP_ANSIBLE_DEFAULT_NODE_HOSTNAME_PREFIX"
     _has_optional_envar "${default_control_node_prefix}"

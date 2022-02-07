@@ -162,7 +162,7 @@ In order to use Terraform and `cert-manager` with the Cloudflare DNS challenge y
 
 1. Head over to Cloudflare and create a API key by going [here](https://dash.cloudflare.com/profile/api-tokens).
 
-2. Under the `API Keys` section, create a global API Key.
+2. Under the `API Keys` section, create a limited API Key.
 
 3. Use the API Key in the configuration section below.
 
